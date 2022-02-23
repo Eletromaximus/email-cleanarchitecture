@@ -10,7 +10,6 @@ export class Left <L, A> {
   }
 }
 
-
 export class Right <L, A> {
   readonly value: A
 

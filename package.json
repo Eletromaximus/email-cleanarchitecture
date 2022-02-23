@@ -2,7 +2,7 @@
   "name": "email-cleanarchitecture",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/main/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --ignore-path .gitignore",
@@ -21,6 +21,8 @@
   "devDependencies": {
     "@commitlint/cli": "^16.2.1",
     "@commitlint/config-conventional": "^16.2.1",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
     "commitizen": "^4.2.4",
