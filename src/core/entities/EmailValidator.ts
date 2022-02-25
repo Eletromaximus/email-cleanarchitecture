@@ -1,4 +1,4 @@
-export function valid (email: string): boolean {
+export function emailValid (email: string): boolean {
   const maxEmailSize = 320
   if (emptyOrTooLarge(email, maxEmailSize) || nonConformant(email)) {
     return false

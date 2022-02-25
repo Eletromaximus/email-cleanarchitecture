@@ -1,5 +1,5 @@
 import { Either, left, right } from '../../shared/either'
-import { valid } from './EmailValidator'
+import { emailValid } from './EmailValidator'
 import { InvalidEmailError } from './errors/InvalidEmailError'
 
 export class Email {
@@ -11,7 +11,7 @@ export class Email {
   }
 
   public static create (email: string): Either<InvalidEmailError, Email> {
-    if (valid(email)) {
+    if (emailValid(email)) {
       return right(new Email(email))
     }
 

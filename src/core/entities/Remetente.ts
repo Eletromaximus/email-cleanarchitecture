@@ -3,6 +3,7 @@ import { Either, left, right } from '../../shared/either'
 import { InvalidEmailError } from './errors/InvalidEmailError'
 import { Name } from './Name'
 import { InvalidNameError } from './errors/InvalidNameError'
+import InvalidDescriptionError from './errors/InvalidDescriptionError'
 
 export class Remetente {
   public readonly email: Email
@@ -20,7 +21,7 @@ export class Remetente {
   }
 
   public static create (email: string, name: string, description: string):
-    Either<InvalidEmailError, Remetente> {
+    Either<InvalidEmailError | InvalidNameError | InvalidDescriptionError, Remetente> {
     const emailOrError = Email.create(email)
 
     if (emailOrError.isLeft()) {
@@ -31,6 +32,10 @@ export class Remetente {
 
     if (nameOrError.isLeft()) {
       return left(new InvalidNameError(name))
+    }
+
+    if (description === '') {
+      return left(new InvalidDescriptionError())
     }
 
     const emailObject: Email = emailOrError.value as Email
