@@ -1,6 +1,10 @@
 import { Either, left, right } from '../../shared/either'
 import { Email } from '../entities/Email'
 import { InvalidEmailError } from '../entities/errors/InvalidEmailError'
+import { InvalidNameError } from '../entities/errors/InvalidNameError'
+import { InvalidRemetenteError } from '../entities/errors/InvalidRemetenteError'
+import { Name } from '../entities/Name'
+import { Remetente } from '../entities/Remetente'
 import { RemetenteRepository } from '../repositories/RemetenteRepository'
 import { RemetenteDTO } from './RemetenteDTO'
 
@@ -10,21 +14,31 @@ export default class RemetenteUseCase {
   }
 
   async execute ({ description, email, name }: RemetenteDTO):
-    Promise<Either<InvalidEmailError, void>> {
-    // const find = await this.useRepository.findByMail(email)
+    Promise<Either<
+    InvalidEmailError | InvalidNameError | InvalidRemetenteError,
+    void>> {
+    const find: Remetente = await this.useRepository.findByMail(email)
 
-    const _email = Email.create(email)
+    if (!find) {
+      const _name = Name.create(name)
 
-    if (_email.isLeft()) {
-      return left(_email.value)
-    }
+      if (_name.isLeft()) {
+        return left(_name.value)
+      }
 
-    const response = await this.useRepository.save({
-      description,
-      email: _email.value,
-      name
-    })
+      const _email = Email.create(email)
 
-    return right(response)
+      if (_email.isLeft()) {
+        return left(_email.value)
+      }
+
+      const response = await this.useRepository.save({
+        description,
+        email: _email.value,
+        name: _name.value
+      })
+
+      return right(response)
+    } return left(new InvalidRemetenteError())
   }
 }
