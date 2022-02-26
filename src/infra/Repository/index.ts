@@ -1,5 +1,5 @@
 import { Remetente } from '../../core/entities/Remetente'
-import { RemetenteRepository } from '../../core/repositories/RemetenteRepository'
+import { RemetenteRepository } from '../../core/useCases/ports/RemetenteRepository'
 
 const knex = require('../../database')
 

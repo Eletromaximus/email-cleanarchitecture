@@ -1,4 +1,4 @@
-import { Remetente } from '../entities/Remetente'
+import { Remetente } from '../../entities/Remetente'
 
 export interface RemetenteRepository {
   save(remetente: Remetente): Promise<void>
