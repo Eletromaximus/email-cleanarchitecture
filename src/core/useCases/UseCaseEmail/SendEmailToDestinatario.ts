@@ -1,13 +1,13 @@
 import { Either, left, right } from '../../../shared/either'
-import { InvalidRemetenteError } from '../../entities/errors/InvalidRemetenteError'
-import { Remetente } from '../../entities/Remetente'
+import { InvalidDestinatarioError } from '../../entities/errors/InvalidDestinatarioError'
+import { Destinatario } from '../../entities/Destinatario'
 import { MailServiceError } from '../errors/MailServiceError'
 import { EmailOptions, EmailService } from '../ports/EmailService'
 import { SendEmail } from './SendEmail'
 import { SendEmailData } from './SendEmailData'
 import { SendEmailResponse } from './SendEmailResponse'
 
-export class SendEmailToRemetente implements SendEmail {
+export class SendEmailToDestinatario implements SendEmail {
   private readonly mailService: EmailService
   private readonly mailOptions: EmailOptions
 
@@ -18,8 +18,8 @@ export class SendEmailToRemetente implements SendEmail {
 
   async sendEmailToUser ({ name, email, description }: SendEmailData):
     Promise<SendEmailResponse> {
-    const remetenteOrError: Either<InvalidRemetenteError,
-      Remetente > = Remetente.create(email, name, description)
+    const remetenteOrError: Either<InvalidDestinatarioError,
+      Destinatario > = Destinatario.create(email, name, description)
 
     if (remetenteOrError.isLeft()) {
       return left(remetenteOrError.value)

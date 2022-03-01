@@ -5,7 +5,7 @@ import { Name } from './Name'
 import { InvalidNameError } from './errors/InvalidNameError'
 import InvalidDescriptionError from './errors/InvalidDescriptionError'
 
-export class Remetente {
+export class Destinatario {
   public readonly email: Email
   public readonly name: Name
   description: string
@@ -21,7 +21,10 @@ export class Remetente {
   }
 
   public static create (email: string, name: string, description: string):
-    Either<InvalidEmailError | InvalidNameError | InvalidDescriptionError, Remetente> {
+    Either<
+      InvalidEmailError | InvalidNameError |
+      InvalidDescriptionError, Destinatario
+    > {
     const emailOrError = Email.create(email)
 
     if (emailOrError.isLeft()) {
@@ -41,6 +44,6 @@ export class Remetente {
     const emailObject: Email = emailOrError.value as Email
     const nameObject: Name = nameOrError.value as Name
 
-    return right(new Remetente(emailObject, nameObject, description))
+    return right(new Destinatario(emailObject, nameObject, description))
   }
 }

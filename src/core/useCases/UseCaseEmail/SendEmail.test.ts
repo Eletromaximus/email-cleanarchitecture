@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { SendEmailToRemetente } from './SendEmailToRemetente'
+import { SendEmailToDestinatario } from './SendEmailToDestinatario'
 import { EmailService, EmailOptions } from '../ports/EmailService'
 import { Either, left, Left, right, Right } from '../../../shared/either'
 import { MailServiceError } from '../errors/MailServiceError'
@@ -37,9 +37,9 @@ class MailServiceStub implements EmailService {
   }
 }
 
-const makeSut = (): { sut: SendEmailToRemetente, mailServiceStub: MailServiceStub } => {
+const makeSut = (): { sut: SendEmailToDestinatario, mailServiceStub: MailServiceStub } => {
   const mailServiceStub = new MailServiceStub()
-  const sut = new SendEmailToRemetente(mailOptions, mailServiceStub)
+  const sut = new SendEmailToDestinatario(mailOptions, mailServiceStub)
   return { sut, mailServiceStub }
 }
 

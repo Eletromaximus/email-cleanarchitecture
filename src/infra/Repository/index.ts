@@ -1,14 +1,14 @@
-import { Remetente } from '../../core/entities/Remetente'
-import { RemetenteRepository } from '../../core/useCases/ports/RemetenteRepository'
+import { Destinatario } from '../../core/entities/Destinatario'
+import { DestinatarioRepository } from '../../core/useCases/ports/Destinatario'
 
 const knex = require('../../database')
 
-export class ProstgresUserRepository implements RemetenteRepository {
-  async findByMail (email: string): Promise<Remetente> {
-    const remetente = await knex('remetentes')
+export class ProstgresUserRepository implements DestinatarioRepository {
+  async findByMail (email: string): Promise<Destinatario> {
+    const destinatario = await knex('remetentes')
       .select()
-      .from('remetentes')
-      .then((data: Remetente[]) => {
+      .from('destinatarios')
+      .then((data: Destinatario[]) => {
         return data[0]
       })
       .catch((err: any) => {
@@ -16,12 +16,12 @@ export class ProstgresUserRepository implements RemetenteRepository {
         return undefined
       })
 
-    return remetente
+    return destinatario
   }
 
-  async save (remetente: Remetente): Promise<void> {
+  async save (destinatario: Destinatario): Promise<void> {
     const result = await knex('remetentes')
-      .insert(remetente)
+      .insert(destinatario)
       .then(() => {
         return 'ok'
       })

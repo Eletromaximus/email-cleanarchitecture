@@ -4,7 +4,7 @@ import { emailValid } from './EmailValidator'
 import InvalidDescriptionError from './errors/InvalidDescriptionError'
 import { InvalidEmailError } from './errors/InvalidEmailError'
 import { Name } from './Name'
-import { Remetente } from './Remetente'
+import { Destinatario } from './Destinatario'
 
 describe('Avaliando formatação de email e nome', () => {
   test('Deve aceitar um email válido', () => {
@@ -16,7 +16,7 @@ describe('Avaliando formatação de email e nome', () => {
   })
 
   test('Não deve aceitar email incorreto', () => {
-    const remetente = Remetente.create(
+    const remetente = Destinatario.create(
       '@gmail.com',
       'max',
       ''
@@ -26,7 +26,7 @@ describe('Avaliando formatação de email e nome', () => {
   })
 
   test('Não deve aceitar descrição em branco', () => {
-    const remetente = Remetente.create(
+    const remetente = Destinatario.create(
       'maxmilliano@gmail.com',
       'max',
       ''

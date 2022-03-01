@@ -1,4 +1,4 @@
-export interface RemetenteDTO {
+export interface DestinatarioDTO {
   email: string
   description: string
   name: string
