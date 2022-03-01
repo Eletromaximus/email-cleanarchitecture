@@ -18,15 +18,15 @@ export class SendEmailToDestinatario implements SendEmail {
 
   async sendEmailToUser ({ name, email, description }: SendEmailData):
     Promise<SendEmailResponse> {
-    const remetenteOrError: Either<InvalidDestinatarioError,
+    const destinatarioOrError: Either<InvalidDestinatarioError,
       Destinatario > = Destinatario.create(email, name, description)
 
-    if (remetenteOrError.isLeft()) {
-      return left(remetenteOrError.value)
+    if (destinatarioOrError.isLeft()) {
+      return left(destinatarioOrError.value)
     }
 
-    const remetente = remetenteOrError.value
-    const greetings = 'Olá <b>' + remetente.name.value + '</b>, como vai?'
+    const destinatario = destinatarioOrError.value
+    const greetings = 'Olá <b>' + destinatario.name.value + '</b>, como vai?'
     const customizedHtml = greetings + '<br><br>' + this.mailOptions.html
     const options = {
       host: this.mailOptions.host,
@@ -34,7 +34,7 @@ export class SendEmailToDestinatario implements SendEmail {
       username: this.mailOptions.username,
       password: this.mailOptions.password,
       from: this.mailOptions.from,
-      to: remetente.name.value + '<' + remetente.email.value + '>',
+      to: destinatario.name.value + '<' + destinatario.email.value + '>',
       subject: this.mailOptions.subject,
       text: this.mailOptions.text,
       html: customizedHtml,

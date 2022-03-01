@@ -5,7 +5,7 @@ const knex = require('../../database')
 
 export class ProstgresUserRepository implements DestinatarioRepository {
   async findByMail (email: string): Promise<Destinatario> {
-    const destinatario = await knex('remetentes')
+    const destinatario = await knex('destinatarios')
       .select()
       .from('destinatarios')
       .then((data: Destinatario[]) => {
@@ -20,13 +20,13 @@ export class ProstgresUserRepository implements DestinatarioRepository {
   }
 
   async save (destinatario: Destinatario): Promise<void> {
-    const result = await knex('remetentes')
+    const result = await knex('destinatarios')
       .insert(destinatario)
       .then(() => {
         return 'ok'
       })
       .catch((error: any) => {
-        console.log(error, 'falha ao inserir remetente')
+        console.log(error, 'falha ao inserir destinatario')
         return undefined
       })
 

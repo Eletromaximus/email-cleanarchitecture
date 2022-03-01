@@ -16,22 +16,22 @@ describe('Avaliando formatação de email e nome', () => {
   })
 
   test('Não deve aceitar email incorreto', () => {
-    const remetente = Destinatario.create(
+    const destinatario = Destinatario.create(
       '@gmail.com',
       'max',
       ''
     )
 
-    expect(remetente).toEqual(right(new InvalidEmailError('@gmail.com')))
+    expect(destinatario).toEqual(right(new InvalidEmailError('@gmail.com')))
   })
 
   test('Não deve aceitar descrição em branco', () => {
-    const remetente = Destinatario.create(
+    const destinatario = Destinatario.create(
       'maxmilliano@gmail.com',
       'max',
       ''
     )
 
-    expect(remetente).toEqual(right(new InvalidDescriptionError()))
+    expect(destinatario).toEqual(right(new InvalidDescriptionError()))
   })
 })
