@@ -1,5 +1,5 @@
-import { Router } from 'express'
+import app from './config/App'
 
-export default (router: Router): void => {
-  router.post('/send')
-}
+app.listen(process.env.PORT || 4000, () => {
+  console.log('Server running')
+})
